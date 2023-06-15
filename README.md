@@ -1,4 +1,4 @@
-This is an example custom dm_control composer.Environment with video recording.
+This is an example custom dm_control composer.Environment with 3D assets and video recording.
 
 mujoco==2.3.5
 

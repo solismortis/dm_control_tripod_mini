@@ -1,0 +1,55 @@
+<mujoco model="tripod">
+    <compiler meshdir="assets/" angle="radian"/>
+    <default>
+        <joint damping="3"/>
+        <motor ctrlrange="-0.7 0.7" ctrllimited="true"/>
+        
+        <default class="leg1">
+            <geom rgba="1 0 0 1"/>
+        </default>
+        
+        <default class="leg2">
+            <geom rgba="0 1 0 1"/>
+        </default>
+        
+        <default class="leg3">
+            <geom rgba="0 0 1 1"/>
+        </default>
+        
+    </default>
+    
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="1 1 1" rgb2=".6 .8 1"
+                 width="256" height="256"/>
+        <mesh name="base" file="base.stl"/>
+        <mesh name="part4" file="part4.stl"/>
+    </asset>
+    
+    <worldbody>
+        <body name="base">
+            <geom name="baseg" type="mesh" mesh="base" rgba="1 1 1 1"/>
+            <body name="leg1">
+                <geom name="part4_1" type="mesh" mesh="part4" pos="0 -0.132 -0.1" class="leg1"/>
+                <joint name="part4_1j" type="hinge" pos="0 -0.132 -0.1" axis="1 0 0" limited="true" range="-0.872665 2.26893"/>
+            </body>
+            
+            <body>
+                <geom type="mesh" mesh="part4" pos="0.11432 0.066 -0.1" euler="0 0 2.0944" class="leg2"/>
+                <joint name="part4_2j" type="hinge" pos="0.11432 0.066 -0.1" axis="-0.5 0.86603 0" limited="true" range="-0.872665 2.26893"/>
+            </body>
+            
+            <body>
+                <geom type="mesh" mesh="part4" pos="-0.11432 0.066 -0.1" euler="0 0 -2.0944" class="leg3"/>
+                <joint name="part4_3j" type="hinge" pos="-0.11432 0.066 -0.1" axis="-0.5 -0.86603 0" limited="true" range="-0.872665 2.26893"/>
+            </body>
+        </body>
+    </worldbody>
+    
+    <actuator>
+        <motor name="part4_1j" gear="200" joint="part4_1j"/>
+        
+        <motor name="part4_2j" gear="200" joint="part4_2j"/>
+        
+        <motor name="part4_3j" gear="200" joint="part4_3j"/>
+    </actuator>
+</mujoco>
